@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<sdf version="1.4">
+  <world name="default">
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <model name="maze">
+      <pose>0 0 -0.03  0 0 0</pose>
+      <static>true</static>
+      <link name="body">
+        <inertial>
+          <mass>1.0</mass>
+        </inertial>
+        <visual name="visual">
+          <geometry>
+            <mesh><uri>file:///home/louis/python2_ws/src/pr2_tutorial/worlds/pr2_maze_reduced.dae</uri></mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <mesh><uri>file:///home/louis/python2_ws/src/pr2_tutorial/worlds/pr2_maze_reduced.dae</uri></mesh>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+  </world>
+</sdf>

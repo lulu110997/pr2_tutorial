@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Start up Gazebo and spawn objects into the world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch"></include>
+  <!-- <node name="spawn_maze" pkg="gazebo_ros" type="spawn_model" args="-file $(find pr2_tutorial)/worlds/pr2_maze.urdf -urdf -x 0 -y 0 -z -0.03 -model maze" /> -->
+  <node name="spawn_table" pkg="gazebo_ros" type="spawn_model" args="-file $(find pr2_tutorial)/worlds/table.urdf -urdf -x 3 -y 0 -z 0.01 -model table" />
+  <node name="spawn_banana" pkg="gazebo_ros" type="spawn_model" args="-file $(find pr2_tutorial)/worlds/banana.urdf -urdf -x 2.7 -y 0 -z 1 -model banana" />
+
+  <!-- Startup PR2 without any mechanism controllers -->
+  <include file="$(find pr2_gazebo)/launch/pr2_no_controllers.launch" />
+
+  <!-- Load and Start Default Controllers -->
+  <include file="$(find pr2_controller_configuration_gazebo)/launch/pr2_default_controllers.launch" />
+
+  <!-- Initialise Moveit planner fpr PR2 -->
+  <include file="$(find pr2_moveit_config)/launch/move_group.launch"></include>
+
+  <!-- Start-up rviz -->
+  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find pr2_tutorial)/launch/config_file.rviz" />
+
+  <!-- gmapping node for SLAM -->
+<!--   <node pkg="gmapping" type="slam_gmapping" name="gmapping_thing" >
+    <param name="scan" value="base_scan" />
+    <param name="odom_frame" value="odom_combined" />
+  </node> -->
+
+</launch>
